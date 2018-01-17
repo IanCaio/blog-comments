@@ -1,0 +1,13 @@
+post1comments:
+  allowedFields: ["parent", "github", "name", "comment"]
+  branch: "master"
+  filename: "{@id}"
+  format: "json"
+  moderation: true
+  path: "_data/post1comments"
+  requiredFields: ["name", "comment"]
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: "iso8601"
