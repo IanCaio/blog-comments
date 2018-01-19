@@ -1,7 +1,7 @@
 post1comments:
   allowedFields: ["parent", "github", "name", "comment"]
   branch: "master"
-  filename: "{@id}"
+  filename: "{@timestamp}-{@id}"
   format: "json"
   moderation: true
   path: "_data/post1comments"
