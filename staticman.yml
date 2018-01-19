@@ -3,7 +3,7 @@ post1comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: true
+  moderation: false
   path: "_data/post1comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -17,7 +17,7 @@ post2comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: true
+  moderation: false
   path: "_data/post2comments"
   requiredFields: ["name", "comment"]
   generatedFields:
