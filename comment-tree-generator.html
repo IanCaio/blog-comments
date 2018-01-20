@@ -1,0 +1,155 @@
+<html>
+	<head>
+		<title>Comment Database .JSON Generator</title>
+		<style>
+			.controlsdiv {
+				display: inline-block;
+			}
+			.resultdiv {
+				display: inline-block;
+				width: 45%;
+			}
+			#result {
+				width: 100%;
+				height: 70vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="resultdiv">
+			<h4>Resulting Code</h4>
+			<textarea id="result"></textarea>
+		</div>
+
+		<div class="controlsdiv">
+			<h5>Nesting Levels Limit</h5>
+			<input type="number" name="nestingLimit" value="4">
+			<h5>Folder Jekyll Object (i.e.: site.data.my-comments)</h5>
+			<input type="text" name="folder" value="site.data.comments">
+
+			<button onclick="generateLiquid();">Generate</button>
+		</div>
+
+
+		<script type="text/javascript">
+			var recursiveBuild = function(currentLevel, levels, folder){
+				var currentText = "";
+				//Root Level
+				if(currentLevel == 1) {
+					//Start JSON array
+					currentText += "[\n";
+
+					currentText += "{%- assign level1_first_obj = true -%}\n";
+					currentText += "{%- assign folder_files1 = "+folder+" | sort -%}\n";
+					currentText += "{%- for level1_file in folder_files1 -%}\n";
+					currentText += "{%- assign level1 = level1_file[1] -%}\n";
+					currentText += "{%- unless level1.parent -%}\n";
+					currentText += "{%- if level1_first_obj == false -%}\n";
+					currentText += ",\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- assign level1_first_obj = false -%}\n";
+					currentText += "{\n";
+					//PROPERTIES HERE
+						currentText += "\"id\":{{ level1._id | jsonify }},\n";
+						currentText += "\"name\":{{ level1.name | jsonify }},\n";
+						//Add github property if present
+						currentText += "{% if level1.github %}\n";
+						currentText += "\"github\":{{ level1.github | jsonify }},\n";
+						currentText += "{% endif %}\n";
+						currentText += "\"date\":{{ level1.date | jsonify }},\n";
+						currentText += "\"comment\":{{ level1.comment | jsonify }}\n";
+					currentText += "{%- assign level1_children = false -%}\n";
+					currentText += "{%- for all_files in "+folder+" -%}\n";
+					currentText += "{%- if all_files[1].parent == level1._id -%}\n";
+					currentText += "{%- assign level1_children = true -%}\n";
+					currentText += "{%- break -%}\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- endfor -%}\n";
+					currentText += "{%- if level1_children == true -%}\n";
+					currentText += ",\"reply\": [\n";
+						//CHILDREN HERE
+						currentText += recursiveBuild(currentLevel+1, levels, folder);
+					currentText += "]\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "}\n";
+					currentText += "{%- endunless -%}\n";
+					currentText += "{%- endfor -%}\n";
+
+					//Close JSON array
+					currentText += "]";
+				}
+				//Last Level
+				else if (currentLevel == levels) {
+					currentText += "{%- assign level"+currentLevel+"_first_obj = true -%}\n";
+					currentText += "{%- assign folder_files"+currentLevel+" = "+folder+" | sort -%}\n";
+					currentText += "{%- for level"+currentLevel+"_file in folder_files"+currentLevel+" -%}\n";
+					currentText += "{%- assign level"+currentLevel+" = level"+currentLevel+"_file[1] -%}\n";
+					currentText += "{%- if level"+currentLevel+".parent == level"+(currentLevel-1)+"._id -%}\n";
+					currentText += "{%- if level"+currentLevel+"_first_obj == false -%}\n";
+					currentText += ",\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- assign level"+currentLevel+"_first_obj = false -%}\n";
+					currentText += "{\n";
+					//PROPERTIES HERE
+						currentText += "\"id\":{{ level"+currentLevel+"._id | jsonify }},\n";
+						currentText += "\"name\":{{ level"+currentLevel+".name | jsonify }},\n";
+						//Add github property if present
+						currentText += "{% if level"+currentLevel+".github %}\n";
+						currentText += "\"github\":{{ level"+currentLevel+".github | jsonify }},\n";
+						currentText += "{% endif %}\n";
+						currentText += "\"date\":{{ level"+currentLevel+".date | jsonify }},\n";
+						currentText += "\"comment\":{{ level"+currentLevel+".comment | jsonify }}\n";
+					currentText += "}\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- endfor -%}\n";
+				}
+				//Middle Level
+				else {
+					currentText += "{%- assign level"+currentLevel+"_first_obj = true -%}\n";
+					currentText += "{%- assign folder_files"+currentLevel+" = "+folder+" | sort -%}\n";
+					currentText += "{%- for level"+currentLevel+"_file in folder_files"+currentLevel+" -%}\n";
+					currentText += "{%- assign level"+currentLevel+" = level"+currentLevel+"_file[1] -%}\n";
+					currentText += "{%- if level"+currentLevel+".parent == level"+(currentLevel-1)+"._id -%}\n";
+					currentText += "{%- if level"+currentLevel+"_first_obj == false -%}\n";
+					currentText += ",\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- assign level"+currentLevel+"_first_obj = false -%}\n";
+					currentText += "{\n";
+					//PROPERTIES HERE
+						currentText += "\"id\":{{ level"+currentLevel+"._id | jsonify }},\n";
+						currentText += "\"name\":{{ level"+currentLevel+".name | jsonify }},\n";
+						//Add github property if present
+						currentText += "{% if level"+currentLevel+".github %}\n";
+						currentText += "\"github\":{{ level"+currentLevel+".github | jsonify }},\n";
+						currentText += "{% endif %}\n";
+						currentText += "\"date\":{{ level"+currentLevel+".date | jsonify }},\n";
+						currentText += "\"comment\":{{ level"+currentLevel+".comment | jsonify }}\n";
+					currentText += "{%- assign level"+currentLevel+"_children = false -%}\n";
+					currentText += "{%- for all_files in "+folder+" -%}\n";
+					currentText += "{%- if all_files[1].parent == level"+currentLevel+"._id -%}\n";
+					currentText += "{%- assign level"+currentLevel+"_children = true -%}\n";
+					currentText += "{%- break -%}\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- endfor -%}\n";
+					currentText += "{%- if level"+currentLevel+"_children == true -%}\n";
+					currentText += ",\"reply\": [\n";
+						//CHILDREN HERE
+						currentText += recursiveBuild(currentLevel+1, levels, folder);
+					currentText += "]\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "}\n";
+					currentText += "{%- endif -%}\n";
+					currentText += "{%- endfor -%}\n";
+				}
+
+				return currentText;
+			}
+
+			function generateLiquid(){
+				document.getElementById("result").value = recursiveBuild(1,
+															document.getElementsByName("nestingLimit")[0].value,
+															document.getElementsByName("folder")[0].value);
+			}
+		</script>
+	</body>
+</html>
