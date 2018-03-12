@@ -67,3 +67,17 @@ post5comments:
       type: date
       options:
         format: "iso8601"
+
+post6comments:
+  allowedFields: ["parent", "github", "name", "comment"]
+  branch: "master"
+  filename: "{@timestamp}-{@id}"
+  format: "json"
+  moderation: false
+  path: "_data/post6comments"
+  requiredFields: ["name", "comment"]
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: "iso8601"
