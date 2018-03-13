@@ -1,0 +1,303 @@
+---
+---
+[
+{%- assign level1_first_obj = true -%}
+{%- assign folder_files1 = site.data.post7comments | sort -%}
+{%- for level1_file in folder_files1 -%}
+{%- assign level1 = level1_file[1] -%}
+{%- unless level1.parent -%}
+{%- if level1_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level1_first_obj = false -%}
+{
+"id":{{ level1._id | jsonify }},
+"name":{{ level1.name | jsonify }},
+{% if level1.github %}
+"github":{{ level1.github | jsonify }},
+{% endif %}
+"date":{{ level1.date | jsonify }},
+"comment":{{ level1.comment | jsonify }}
+{%- assign level1_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level1._id -%}
+{%- assign level1_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level1_children == true -%}
+,"reply": [
+{%- assign level2_first_obj = true -%}
+{%- assign folder_files2 = site.data.post7comments | sort -%}
+{%- for level2_file in folder_files2 -%}
+{%- assign level2 = level2_file[1] -%}
+{%- if level2.parent == level1._id -%}
+{%- if level2_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level2_first_obj = false -%}
+{
+"id":{{ level2._id | jsonify }},
+"name":{{ level2.name | jsonify }},
+{% if level2.github %}
+"github":{{ level2.github | jsonify }},
+{% endif %}
+"date":{{ level2.date | jsonify }},
+"comment":{{ level2.comment | jsonify }}
+{%- assign level2_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level2._id -%}
+{%- assign level2_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level2_children == true -%}
+,"reply": [
+{%- assign level3_first_obj = true -%}
+{%- assign folder_files3 = site.data.post7comments | sort -%}
+{%- for level3_file in folder_files3 -%}
+{%- assign level3 = level3_file[1] -%}
+{%- if level3.parent == level2._id -%}
+{%- if level3_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level3_first_obj = false -%}
+{
+"id":{{ level3._id | jsonify }},
+"name":{{ level3.name | jsonify }},
+{% if level3.github %}
+"github":{{ level3.github | jsonify }},
+{% endif %}
+"date":{{ level3.date | jsonify }},
+"comment":{{ level3.comment | jsonify }}
+{%- assign level3_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level3._id -%}
+{%- assign level3_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level3_children == true -%}
+,"reply": [
+{%- assign level4_first_obj = true -%}
+{%- assign folder_files4 = site.data.post7comments | sort -%}
+{%- for level4_file in folder_files4 -%}
+{%- assign level4 = level4_file[1] -%}
+{%- if level4.parent == level3._id -%}
+{%- if level4_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level4_first_obj = false -%}
+{
+"id":{{ level4._id | jsonify }},
+"name":{{ level4.name | jsonify }},
+{% if level4.github %}
+"github":{{ level4.github | jsonify }},
+{% endif %}
+"date":{{ level4.date | jsonify }},
+"comment":{{ level4.comment | jsonify }}
+{%- assign level4_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level4._id -%}
+{%- assign level4_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level4_children == true -%}
+,"reply": [
+{%- assign level5_first_obj = true -%}
+{%- assign folder_files5 = site.data.post7comments | sort -%}
+{%- for level5_file in folder_files5 -%}
+{%- assign level5 = level5_file[1] -%}
+{%- if level5.parent == level4._id -%}
+{%- if level5_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level5_first_obj = false -%}
+{
+"id":{{ level5._id | jsonify }},
+"name":{{ level5.name | jsonify }},
+{% if level5.github %}
+"github":{{ level5.github | jsonify }},
+{% endif %}
+"date":{{ level5.date | jsonify }},
+"comment":{{ level5.comment | jsonify }}
+{%- assign level5_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level5._id -%}
+{%- assign level5_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level5_children == true -%}
+,"reply": [
+{%- assign level6_first_obj = true -%}
+{%- assign folder_files6 = site.data.post7comments | sort -%}
+{%- for level6_file in folder_files6 -%}
+{%- assign level6 = level6_file[1] -%}
+{%- if level6.parent == level5._id -%}
+{%- if level6_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level6_first_obj = false -%}
+{
+"id":{{ level6._id | jsonify }},
+"name":{{ level6.name | jsonify }},
+{% if level6.github %}
+"github":{{ level6.github | jsonify }},
+{% endif %}
+"date":{{ level6.date | jsonify }},
+"comment":{{ level6.comment | jsonify }}
+{%- assign level6_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level6._id -%}
+{%- assign level6_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level6_children == true -%}
+,"reply": [
+{%- assign level7_first_obj = true -%}
+{%- assign folder_files7 = site.data.post7comments | sort -%}
+{%- for level7_file in folder_files7 -%}
+{%- assign level7 = level7_file[1] -%}
+{%- if level7.parent == level6._id -%}
+{%- if level7_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level7_first_obj = false -%}
+{
+"id":{{ level7._id | jsonify }},
+"name":{{ level7.name | jsonify }},
+{% if level7.github %}
+"github":{{ level7.github | jsonify }},
+{% endif %}
+"date":{{ level7.date | jsonify }},
+"comment":{{ level7.comment | jsonify }}
+{%- assign level7_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level7._id -%}
+{%- assign level7_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level7_children == true -%}
+,"reply": [
+{%- assign level8_first_obj = true -%}
+{%- assign folder_files8 = site.data.post7comments | sort -%}
+{%- for level8_file in folder_files8 -%}
+{%- assign level8 = level8_file[1] -%}
+{%- if level8.parent == level7._id -%}
+{%- if level8_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level8_first_obj = false -%}
+{
+"id":{{ level8._id | jsonify }},
+"name":{{ level8.name | jsonify }},
+{% if level8.github %}
+"github":{{ level8.github | jsonify }},
+{% endif %}
+"date":{{ level8.date | jsonify }},
+"comment":{{ level8.comment | jsonify }}
+{%- assign level8_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level8._id -%}
+{%- assign level8_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level8_children == true -%}
+,"reply": [
+{%- assign level9_first_obj = true -%}
+{%- assign folder_files9 = site.data.post7comments | sort -%}
+{%- for level9_file in folder_files9 -%}
+{%- assign level9 = level9_file[1] -%}
+{%- if level9.parent == level8._id -%}
+{%- if level9_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level9_first_obj = false -%}
+{
+"id":{{ level9._id | jsonify }},
+"name":{{ level9.name | jsonify }},
+{% if level9.github %}
+"github":{{ level9.github | jsonify }},
+{% endif %}
+"date":{{ level9.date | jsonify }},
+"comment":{{ level9.comment | jsonify }}
+{%- assign level9_children = false -%}
+{%- for all_files in site.data.post7comments -%}
+{%- if all_files[1].parent == level9._id -%}
+{%- assign level9_children = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if level9_children == true -%}
+,"reply": [
+{%- assign level10_first_obj = true -%}
+{%- assign folder_files10 = site.data.post7comments | sort -%}
+{%- for level10_file in folder_files10 -%}
+{%- assign level10 = level10_file[1] -%}
+{%- if level10.parent == level9._id -%}
+{%- if level10_first_obj == false -%}
+,
+{%- endif -%}
+{%- assign level10_first_obj = false -%}
+{
+"id":{{ level10._id | jsonify }},
+"name":{{ level10.name | jsonify }},
+{% if level10.github %}
+"github":{{ level10.github | jsonify }},
+{% endif %}
+"date":{{ level10.date | jsonify }},
+"comment":{{ level10.comment | jsonify }}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endif -%}
+{%- endfor -%}
+]
+{%- endif -%}
+}
+{%- endunless -%}
+{%- endfor -%}
+]
