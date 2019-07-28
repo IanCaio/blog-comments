@@ -3,7 +3,7 @@ post1comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post1comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -17,7 +17,7 @@ post2comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post2comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -31,7 +31,7 @@ post3comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post3comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -45,7 +45,7 @@ post4comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post4comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -59,7 +59,7 @@ post5comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post5comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -73,7 +73,7 @@ post6comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post6comments"
   requiredFields: ["name", "comment"]
   generatedFields:
@@ -87,7 +87,7 @@ post7comments:
   branch: "master"
   filename: "{@timestamp}-{@id}"
   format: "json"
-  moderation: false
+  moderation: true
   path: "_data/post7comments"
   requiredFields: ["name", "comment"]
   generatedFields:
